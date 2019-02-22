@@ -8,7 +8,6 @@ app.use(express.static('./public'))
 app.use(bodyParser.urlencoded({extended: false}))
 
 const userRoute = require('./routes/user.js')
-
 app.use(userRoute)
 
 app.listen(3003, () => {
