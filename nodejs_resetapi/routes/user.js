@@ -2,8 +2,9 @@
 const express = require('express')
 const app = express()
 const mysql = require('mysql')
-const bodyParser = require('body-parser')
 
+// JSON File
+const jsonData = require('../resources/dummy.json')
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -22,22 +23,26 @@ db.connect((err) => {
 
 const route = express.Router()
 
-route.get('/users', (req, res) => {
-    const queryString = 'select * from users'
-    db.query(queryString, (err, rows, fields) => {
-        if (err) {
-            res.sendStatus(500)
-            return
-        }
-        const user = rows.map((row) => {
-            return {
-                id: row.id,
-                first_name: row.firstName,
-                last_name: row.lastName
-            }
-        })
-        res.json(user)
-    })
+// route.get('/users', (req, res) => {
+//     const queryString = 'select * from users'
+//     db.query(queryString, (err, rows, fields) => {
+//         if (err) {
+//             res.sendStatus(500)
+//             return
+//         }
+//         const user = rows.map((row) => {
+//             return {
+//                 id: row.id,
+//                 first_name: row.firstName,
+//                 last_name: row.lastName
+//             }
+//         })
+//         res.json(user)
+//     })
+// })
+
+route.get('/json', (req, res) => {
+    res.json(jsonData)
 })
 
 
